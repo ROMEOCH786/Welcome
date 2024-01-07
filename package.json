@@ -1,1 +1,16 @@
+{
+  "name": "your-project-name",
+  "version": "1.0.0",
+  "description": "Your project description",
+  "main": "send_requests.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "other-package": "^1.2.3"
+    // List other dependencies here
+  },
+  "scripts": {
+    "start": "node send_requests.js"
+    // Add other scripts if needed
+  }
+}
 
