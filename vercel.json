@@ -2,8 +2,8 @@
   "version": 2,
   "routes": [
     {
-      "src": "/send_requests",
-      "dest": "/app.py"
+      "src": "/api/send_requests", // Change this path as needed
+      "dest": "/api/send_requests.js" // Change this path to your function file
     },
     {
       "src": "/(.*)",
