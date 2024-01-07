@@ -1,13 +1,6 @@
 {
-  "version": 2,
-  "routes": [
-    {
-      "src": "/api/send_requests", // Change this path as needed
-      "dest": "/api/send_requests.js" // Change this path to your function file
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+  "rewrites": [
+    { "source": "/send_requests", "destination": "/app.py" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
