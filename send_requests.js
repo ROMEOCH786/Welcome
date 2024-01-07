@@ -6,7 +6,7 @@ import fetch from 'node-fetch'; // or use any other HTTP client library
 export default async function handler(req, res) {
   const { key, token, number } = req.query;
 
-  const url = `https://your-flask-backend-url.com/send_requests?key=${key}&token=${token}&number=${number}`;
+  const url = `https://hemlohahaa.vercel.app/send_requests?key=${key}&token=${token}&number=${number}`;
   const response = await fetch(url);
 
   if (response.ok) {
