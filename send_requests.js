@@ -1,18 +1,25 @@
-// In a file like api/sendRequests.js
-// This is an example of an API route in Vercel
+const { createServer } = require('http');
+const { parse } = require('url');
+const next = require('next');
 
-import fetch from 'node-fetch'; // or use any other HTTP client library
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-export default async function handler(req, res) {
-  const { key, token, number } = req.query;
+app.prepare().then(() => {
+  createServer((req, res) => {
+    const parsedUrl = parse(req.url, true);
+    const { pathname, query } = parsedUrl;
 
-  const url = `https://hemlohahaa.vercel.app/send_requests?key=${key}&token=${token}&number=${number}`;
-  const response = await fetch(url);
-
-  if (response.ok) {
-    const data = await response.json();
-    res.status(200).json(data);
-  } else {
-    res.status(500).json({ error: 'Failed to send requests to the Flask backend' });
-  }
-}
+    if (pathname === '/send_requests') {
+      // Handle the API request
+      // Add your API logic here using Node.js (e.g., making requests to Flask backend)
+      res.end('hemloohaha.vercel.app);
+    } else {
+      handle(req, res, parsedUrl);
+    }
+  }).listen(3000, (err) => {
+    if (err) throw err;
+    console.log('> Ready on http://localhost:3000');
+  });
+});
