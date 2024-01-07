@@ -22,18 +22,22 @@ def send_requests(key, token, number):
         "projectId": "DT_2022102902",
     }
 
-    flag = False  # Flag to control the loop
+    flag = [False]  # Flag as a mutable list
 
     def generate():
-        nonlocal flag
-        while not flag:
-            response = requests.post(url, json=data, headers=headers)
-            yield json.dumps(response.json()) + '\n'
+        while not flag[0]:
+            try:
+                response = requests.post(url, json=data, headers=headers)
+                response_json = response.json()
+                yield json.dumps(response_json) + '\n'
 
-            credit_amount = response.json()['data']['creditsAmount']
-            if credit_amount >= number:
-                flag = True
-                yield json.dumps({"message": "done"})
+                credit_amount = response_json.get('data', {}).get('creditsAmount')
+                if credit_amount is not None and credit_amount >= number:
+                    flag[0] = True
+                    yield json.dumps({"message": "done"})
+
+            except Exception as e:
+                yield json.dumps({"error": str(e)}) + '\n'
 
             time.sleep(10)
 
@@ -48,4 +52,4 @@ def handle_request():
     return Response(send_requests(key, token, number), content_type='application/json')
 
 if __name__ == '__main__':
-    app.run(debug=True,port=3084)
+    app.run(debug=True, port=5000)
