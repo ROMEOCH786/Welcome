@@ -1,6 +1,13 @@
 {
-  "rewrites": [
-    { "source": "/send_requests", "destination": "/app.py" },
-    { "source": "/(.*)", "destination": "/index.html" }
+  "version": 2,
+  "routes": [
+    {
+      "src": "/send_requests",
+      "dest": "/app.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }
